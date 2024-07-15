@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Hotel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+            background-color: #fff;
+            padding: 1rem;
+            border: 1px solid #ccc;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+        }
+
+        input,Here's the rest of the booking HTML:
+
+### Page 2: Hotel Booking (book.html)
+
+This page allows users to book the selected hotel:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Hotel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+            background-color: #fff;
+            padding: 1rem;
+            border: 1px solid #ccc;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+        }
+
+        input, button {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hotel-details {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Book Hotel</h1>
+    </header>
+    <main>
+        <section id="booking-section">
+            <div id="hotel-info"></div>
+            <form id="booking-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="checkin">Check-in Date:</label>
+                <input type="date" id="checkin" name="checkin" required>
+
+                <label for="checkout">Check-out Date:</label>
+                <input type="date" id="checkout" name="checkout" required>
+
+                <button type="submit">Book Now</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('name');
+            const location = params.get('location');
+            const price = params.get('price');
+
+            const hotelInfo = document.getElementById('hotel-info');
+            hotelInfo.innerHTML = `
+                <div class="hotel-details">
+                    <h3>${name}</h3>
+                    <p>Location: ${location}</p>
+                    <p>Price: ${price}</p>
+                </div>
+            `;
+
+            document.getElementById('booking-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                alert('Booking successful!');
+                // Here, you can handle the form submission, e.g., sending the booking data to a server
+            });
+        });
+    </script>
+</body>
+</html>

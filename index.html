@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Agency</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        header img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2em;
+        }
+        nav {
+            margin: 0 auto;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+        .search-section {
+            background-color: #007bff;
+            padding: 20px;
+            border-radius: 5px;
+            color: white;
+            text-align: center;
+        }
+        .search-section select, .search-section input, .search-section button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+        .search-section select, .search-section input {
+            width: 200px;
+        }
+        .search-section button {
+            background-color: #0056b3;
+            color: white;
+            cursor: pointer;
+        }
+        .search-section button:hover {
+            background-color: #003d80;
+        }
+        .carousel {
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+            width: 100%;
+        }
+        .carousel-inner {
+            display: flex;
+            width: 200%;
+            animation: scroll 30s linear infinite;
+        }
+        .carousel img {
+            width: 10%;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .top-commenters {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        .commenter {
+            text-align: center;
+            margin: 0 20px;
+        }
+        .commenter img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        .flights-hotels {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .flights, .hotels, .restaurants {
+            width: 30%;
+        }
+        .comments {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .comment-form {
+            margin-bottom: 20px;
+        }
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .comment-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .comment-form button:hover {
+            background-color: #0056b3;
+        }
+        .comment {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .book-button {
+            padding: 8px 15px;
+            background-color: #66b3ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 14px;
+        }
+        .book-button:hover {
+            background-color: #3399ff;
+            transform: scale(1.05);
+        }
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        footer .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        footer .social-links a {
+            margin: 0 10px;
+        }
+        footer .social-links img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="logotw.gif" alt="Logo">
+        <h1>Jael's Journey Hub</h1>
+    </div>
+    <nav>
+        <a href="#home" onclick="scrollToTop()">Home</a>
+        <a href="checkout.html">Checkout</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="search-section">
+        <select id="departure-airport">
+            <option value="">Select Departure Airport</option>
+        </select>
+        <input type="date" id="departure-date">
+        <button onclick="searchFlights()">Search</button>
+    </div>
+
+    <!-- Background Carousel Section -->
+    <div class="carousel">
+        <div class="carousel-inner">
+            <img src="destination1.jpg" alt="Destination 1">
+            <img src="destination2.jpg" alt="Destination 2">
+            <img src="destination3.jpg" alt="Destination 3">
+            <img src="destination4.jpg" alt="Destination 4">
+            <img src="destination5.jpg" alt="Destination 5">
+            <img src="destination1.jpg" alt="Destination 1">
+            <img src="destination2.jpg" alt="Destination 2">
+            <img src="destination3.jpg" alt="Destination 3">
+            <img src="destination4.jpg" alt="Destination 4">
+            <img src="destination5.jpg" alt="Destination 5">
+        </div>
+    </div>
+
+    <!-- Top Commenters Section -->
+    <div class="top-commenters" id="commenter-carousel">
+        <div class="commenter" id="commenter1">
+            <img src="commenter1.jpg" alt="Commenter 1">
+            <p>Bekcodes8</p>
+            <p>"Thank You to JJH it helped me on my trip to San Francisco"</p>
+        </div>
+        <div class="commenter" id="commenter2">
+            <img src="commenter2.jpg" alt="Commenter 2">
+            <p>Jen.Cereal53</p>
+            <p>"NYC pride last minute was going to be a nightmare with no hotel but Jael's website helped me find openings last minute"</p>
+        </div>
+        <div class="commenter" id="commenter3">
+            <img src="commenter3.jpg" alt="Commenter 3">
+            <p>RellTravels4</p>
+            <p>"Japan was great thank you JJH"</p>
+        </div>
+    </div>
+
+    <!-- Flights and Hotels Section -->
+    <div class="flights-hotels" id="details-section">
+        <div id="flights"></div>
+        <div id="hotels"></div>
+        <div id="restaurants"></div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="comments">
+        <h2>Leave a Comment</h2>
+        <div class="comment-form">
+            <input type="text" id="commenter-name" placeholder="Your Name">
+            <textarea id="commenter-message" placeholder="Your Comment"></textarea>
+            <button onclick="submitComment()">Submit</button>
+        </div>
+        <div id="comments-list"></div>
+    </div>
+</div>
+
+<footer>
+    <div class="social-links">
+        <a href="https://www.facebook.com/kayak/" target="_blank">
+            <img src="facebook1.png" alt="Facebook">
+        </a>
+        <a href="https://x.com/KAYAK" target="_blank">
+            <img src="twitter1.png" alt="Twitter">
+        </a>
+        <a href="https://www.instagram.com/kayak/" target="_blank">
+            <img src="instagram1.png" alt="Instagram">
+        </a>
+        <a href="https://www.linkedin.com/feed/" target="_blank">
+            <img src="linkedin1.png" alt="LinkedIn">
+        </a>
+    </div>
+    <p>&copy; 2024 Jael's Journey Hub.</p>
+    <p>Contact us: infoJJH@travelagency.com</p>
+</footer>
+
+<script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel">
+    const airports = [
+        { code: 'LAX', name: 'Los Angeles International Airport', region: 'USA' },
+        { code: 'JFK', name: 'John F. Kennedy International Airport', region: 'USA' },
+        { code: 'NRT', name: 'Narita International Airport', region: 'Japan' },
+        { code: 'MEX', name: 'Mexico City International Airport', region: 'Mexico' },
+        { code: 'SYD', name: 'Sydney Kingsford Smith Airport', region: 'Australia' },
+        { code: 'LHR', name: 'Heathrow Airport', region: 'UK' },
+        { code: 'CDG', name: 'Charles de Gaulle Airport', region: 'France' },
+        { code: 'FRA', name: 'Frankfurt Airport', region: 'Germany' },
+        { code: 'HND', name: 'Haneda Airport', region: 'Japan' }
+    ];
+
+    const airlines = {
+        'USA': ['Delta', 'American Airlines', 'United', 'Southwest'],
+        'Japan': ['Japan Airlines', 'ANA'],
+        'Mexico': ['Aeroméxico', 'Volaris'],
+        'Australia': ['Qantas', 'Virgin Australia'],
+        'UK': ['British Airways'],
+        'France': ['Air France'],
+        'Germany': ['Lufthansa']
+    };
+
+    const hotels = {
+        'LAX': [
+            { name: 'The Ritz-Carlton, Los Angeles', rating: '5', description: 'Luxury hotel in the heart of LA.' },
+            { name: 'Hilton Los Angeles Airport', rating: '4', description: 'Conveniently located near LAX with free airport shuttle.' },
+        ],
+        'JFK': [
+            { name: 'TWA Hotel', rating: '4.5', description: 'Retro-style hotel at JFK Airport with runway views.' },
+            { name: 'Hilton New York JFK Airport', rating: '4', description: 'Comfortable stay with easy access to the airport.' },
+        ],
+        'NRT': [
+            { name: 'Narita Tobu Hotel Airport', rating: '4', description: 'Comfortable stay with a free airport shuttle.' },
+            { name: 'Hotel Nikko Narita', rating: '4.5', description: 'Luxurious hotel close to Narita Airport.' },
+        ],
+        'MEX': [
+            { name: 'Camino Real Aeropuerto', rating: '4', description: 'Connected to Mexico City Airport with great amenities.' },
+            { name: 'NH Collection Mexico City Airport T2', rating: '4.5', description: 'Modern hotel in Terminal 2 with excellent services.' },
+        ],
+        'SYD': [
+            { name: 'Rydges Sydney Airport Hotel', rating: '4.5', description: 'Conveniently located opposite the international terminal.' },
+            { name: 'Stamford Plaza Sydney Airport', rating: '4.5', description: 'Luxury hotel close to Sydney Airport with top-notch facilities.' },
+        ],
+        'LHR': [
+            { name: 'Sofitel London Heathrow', rating: '5', description: 'Luxury hotel with direct access to Terminal 5.' },
+            { name: 'Hilton London Heathrow Airport', rating: '4', description: 'Modern hotel with free airport shuttle.' },
+        ],
+        'CDG': [
+            { name: 'Pullman Paris Roissy CDG Airport', rating: '4.5', description: 'Upscale hotel with contemporary rooms.' },
+            { name: 'Novotel Paris Charles de Gaulle Airport', rating: '4', description: 'Convenient hotel with a free airport shuttle.' },
+        ],
+        'FRA': [
+            { name: 'Sheraton Frankfurt Airport Hotel', rating: '4.5', description: 'Modern hotel directly connected to Terminal 1.' },
+            { name: 'Hilton Garden Inn Frankfurt Airport', rating: '4', description: 'Convenient hotel with great amenities.' },
+        ],
+        'HND': [
+            { name: 'The Royal Park Hotel Tokyo Haneda', rating: '4.5', description: 'Stylish hotel connected to the airport.' },
+            { name: 'Haneda Excel Hotel Tokyu', rating: '4', description: 'Comfortable hotel with direct access to Terminal 2.' },
+        ]
+    };
+
+    const restaurants = {
+        'LAX': [
+            { name: 'In-N-Out Burger', description: 'Famous for its delicious burgers and fries.' },
+            { name: 'Bubba Gump Shrimp Co.', description: 'Seafood restaurant inspired by the movie Forrest Gump.' },
+        ],
+        'JFK': [
+            { name: 'Shake Shack', description: 'Popular burger joint known for its shakes and crinkle-cut fries.' },
+            { name: 'Deep Blue Sushi', description: 'Sushi restaurant offering fresh and high-quality sushi.' },
+        ],
+        'NRT': [
+            { name: 'Sushi Kyotatsu', description: 'Authentic sushi restaurant with fresh seafood.' },
+            { name: 'Tentei', description: 'Tempura restaurant offering a variety of tempura dishes.' },
+        ],
+        'MEX': [
+            { name: 'Azul Condesa', description: 'Traditional Mexican cuisine with a modern twist.' },
+            { name: 'Pujol', description: 'Award-winning restaurant offering innovative Mexican dishes.' },
+        ],
+        'SYD': [
+            { name: 'Quay', description: 'Fine dining restaurant with stunning views of the Sydney Opera House.' },
+            { name: 'Tetsuya’s', description: 'Japanese-inspired restaurant offering a unique dining experience.' },
+        ],
+        'LHR': [
+            { name: 'Gordon Ramsay Plane Food', description: 'Modern European cuisine by celebrity chef Gordon Ramsay.' },
+            { name: 'Pret A Manger', description: 'Popular chain offering sandwiches, salads, and organic coffee.' },
+        ],
+        'CDG': [
+            { name: 'Ladurée', description: 'Famous for its macarons and elegant pastries.' },
+            { name: 'Café de la Paix', description: 'Classic French café with a rich history.' },
+        ],
+        'FRA': [
+            { name: 'Hausmann’s', description: 'Traditional German cuisine in a cozy setting.' },
+            { name: 'Käfer’s', description: 'Upscale restaurant offering gourmet dishes and fine wines.' },
+        ],
+        'HND': [
+            { name: 'Hyakuzen', description: 'Japanese restaurant offering a variety of dishes.' },
+            { name: 'Tonkatsu Wako', description: 'Specializes in tonkatsu (breaded pork cutlets).' },
+        ]
+    };
+
+    function formatAMPM(date) {
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        const strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
+    function generateFlightTimes(region) {
+        const now = new Date();
+        const flights = [];
+        for (let i = 0; i < 5; i++) {
+            const departureTime = new Date(now.getTime() + Math.random() * 4 * 60 * 60 * 1000); // Random time within 4 hours
+            const duration = Math.floor(Math.random() * 6) + 1; // Random duration between 1 to 6 hours
+            const arrivalTime = new Date(departureTime.getTime() + duration * 60 * 60 * 1000);
+            flights.push({
+                airline: airlines[region][Math.floor(Math.random() * airlines[region].length)],
+                departure: formatAMPM(departureTime),
+                arrival: formatAMPM(arrivalTime),
+                duration: duration + 'h ' + Math.floor(Math.random() * 60) + 'm'
+            });
+        }
+        return flights;
+    }
+
+    function searchFlights() {
+        const departure = document.getElementById('departure-airport').value;
+        const departureDate = document.getElementById('departure-date').value;
+
+        if (!departure || !departureDate) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        const airport = airports.find(a => a.code === departure);
+        const flights = generateFlightTimes(airport.region);
+        ReactDOM.render(<FlightList flights={flights} />, document.getElementById('flights'));
+        ReactDOM.render(<HotelList hotels={hotels[airport.code]} />, document.getElementById('hotels'));
+        ReactDOM.render(<RestaurantList restaurants={restaurants[airport.code]} />, document.getElementById('restaurants'));
+
+        document.getElementById('details-section').style.display = 'flex';
+    }
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function submitComment() {
+        const name = document.getElementById('commenter-name').value;
+        const message = document.getElementById('commenter-message').value;
+
+        if (name && message) {
+            const commentsList = document.getElementById('comments-list');
+            const commentItem = document.createElement('div');
+            commentItem.classList.add('comment');
+            commentItem.innerHTML = `<strong>${name}</strong><p>${message}</p>`;
+            commentsList.appendChild(commentItem);
+
+            // Clear form
+            document.getElementById('commenter-name').value = '';
+            document.getElementById('commenter-message').value = '';
+        } else {
+            alert('Please fill in both fields.');
+        }
+    }
+
+    function bookNow(item) {
+        const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+        selectedItems.push(item);
+        localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+        window.location.href = 'checkout.html';
+    }
+
+    const FlightList = ({ flights }) => (
+        <div className="flight-list">
+            <h2>Available Flights</h2>
+            <ul>
+                {flights.map((flight, index) => (
+                    <li key={index}>
+                        {`${flight.airline} flight departs at ${flight.departure}, arrives at ${flight.arrival}, duration: ${flight.duration}`} 
+                        <button className="book-button" onClick={() => bookNow(flight)}>Book Now</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+
+    const HotelList = ({ hotels }) => (
+        <div className="hotel-list">
+            <h2>Recommended Hotels</h2>
+            <ul>
+                {hotels.map((hotel, index) => (
+                    <li key={index}>
+                        <strong>{hotel.name}</strong> - Rating: {hotel.rating}<br />
+                        {hotel.description}
+                        <button className="book-button" onClick={() => bookNow(hotel)}>Book Now</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+
+    const RestaurantList = ({ restaurants }) => (
+        <div className="restaurant-list">
+            <h2>Popular Restaurants</h2>
+            <ul>
+                {restaurants.map((restaurant, index) => (
+                    <li key={index}>
+                        <strong>{restaurant.name}</strong><br />
+                        {restaurant.description}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+
+    // Initial setup
+    document.getElementById('details-section').style.display = 'none';
+    airports.forEach(airport => {
+        const option = document.createElement('option');
+        option.value = airport.code;
+        option.text = airport.name;
+        document.getElementById('departure-airport').appendChild(option);
+    });
+</script>
+
+</body>
+</html>

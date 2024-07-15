@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Jael's Journey Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        header img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2em;
+        }
+        nav {
+            margin: 0 auto;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 0 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .checkout-form {
+            padding: 20px;
+        }
+        .checkout-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .checkout-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .checkout-form input, .checkout-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .checkout-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .checkout-form button:hover {
+            background-color: #0056b3;
+        }
+        .items-list {
+            margin-bottom: 20px;
+        }
+        .thank-you-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #e0f7fa;
+            border: 1px solid #00acc1;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        footer .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        footer .social-links a {
+            margin: 0 10px;
+        }
+        footer .social-links img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="logotw.gif" alt="Logo">
+        <h1>Jael's Journey Hub</h1>
+    </div>
+    <nav>
+        <a href="TravelWebsite.html">Home</a>
+        <a href="#checkout">Checkout</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="checkout-form">
+        <h2>Checkout</h2>
+        <div class="items-list" id="items-list"></div>
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+        <label for="card-number">Card Number</label>
+        <input type="text" id="card-number" required>
+        <label for="expiry-date">Expiry Date</label>
+        <input type="month" id="expiry-date" required>
+        <button onclick="submitCheckout()">Submit</button>
+    </div>
+    <div class="thank-you-message" id="thank-you-message">
+        <p>Thank you for booking with Jael's Journey Hub, Safe Travels!</p>
+    </div>
+</div>
+
+<footer>
+    <div class="social-links">
+        <a href="https://www.facebook.com/kayak/" target="_blank">
+            <img src="facebook1.png" alt="Facebook">
+        </a>
+        <a href="https://x.com/KAYAK" target="_blank">
+            <img src="twitter1.png" alt="Twitter">
+        </a>
+        <a href="https://www.instagram.com/kayak/" target="_blank">
+            <img src="instagram1.png" alt="Instagram">
+        </a>
+        <a href="https://www.linkedin.com/feed/" target="_blank">
+            <img src="linkedin1.png" alt="LinkedIn">
+        </a>
+    </div>
+    <p>&copy; 2024 Jael's Journey Hub.</p>
+    <p>Contact us: infoJJH@travelagency.com</p>
+</footer>
+
+<script>
+    const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+
+    function renderItems() {
+        const itemsList = document.getElementById('items-list');
+        itemsList.innerHTML = '<h3>Selected Items:</h3>';
+        selectedItems.forEach((item, index) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.textContent = `${item.name || item.airline} - ${item.description || item.departure}`;
+            itemsList.appendChild(itemDiv);
+        });
+    }
+
+    function submitCheckout() {
+        const name = document.getElementById('name').value;
+        const cardNumber = document.getElementById('card-number').value;
+        const expiryDate = document.getElementById('expiry-date').value;
+
+        if (name && cardNumber && expiryDate) {
+            document.getElementById('thank-you-message').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'TravelWebsite.html';
+            }, 3000);
+        } else {
+            alert('Please fill in all fields.');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderItems);
+</script>
+
+</body>
+</html>
+
